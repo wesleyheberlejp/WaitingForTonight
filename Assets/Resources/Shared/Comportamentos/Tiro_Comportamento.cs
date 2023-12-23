@@ -16,6 +16,12 @@ public class Tiro_Comportamento : MonoBehaviour
             case TipoDirecaoMovimentoBala_Enum.Direita:
                 this.transform.Translate(new Vector3(Time.fixedDeltaTime * Velocidade, 0f, 0f));
                 break;
+            case TipoDirecaoMovimentoBala_Enum.Cima:
+                this.transform.Translate(new Vector3(0f, Time.fixedDeltaTime * Velocidade,0f ));
+                break;
+            case TipoDirecaoMovimentoBala_Enum.Frente:
+                this.transform.Translate(new Vector3(0f, 0f, Time.fixedDeltaTime * Velocidade));
+                break;
         }
     }
 

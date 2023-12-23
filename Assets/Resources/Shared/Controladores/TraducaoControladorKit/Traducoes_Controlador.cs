@@ -1,16 +1,12 @@
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using UnityEditor.TextCore.Text;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 
-    public class Traducoes_Controlador : MonoBehaviour
+public class Traducoes_Controlador : MonoBehaviour
     {
         //nomeIdioma_PAIS ex: pt-BR ou en-US
         public static Traducoes_Controlador Self;

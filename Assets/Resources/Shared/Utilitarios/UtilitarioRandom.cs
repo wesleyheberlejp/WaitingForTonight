@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using UnityEngine;
 
 public static class UtilitarioRandom
 {
-    internal static Random Rand = new Random();
+    internal static System.Random Rand = new System.Random();
 
     public static int GetRandom(int valorInicial, int valorFinal)
     {
@@ -15,6 +12,12 @@ public static class UtilitarioRandom
     }
 
     public static int GetRandomOption(List<int> options)
+    {
+        var selecionado = GetRandom(0, options.Count - 1);
+        return options[selecionado];
+    }
+
+    public static GameObject GetRandomOption(List<GameObject> options)
     {
         var selecionado = GetRandom(0, options.Count - 1);
         return options[selecionado];
