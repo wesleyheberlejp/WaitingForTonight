@@ -29,6 +29,7 @@ public class InimigoBase_Script : MonoBehaviour
 
     internal Rigidbody[] RagDollRBs;
     private bool EstaVivo;
+    internal bool PerseguirAlvos;
 
     [Header("---------------------------------------------------->")]
     public List<GameObject> Alvos;
@@ -59,13 +60,24 @@ public class InimigoBase_Script : MonoBehaviour
 
     private void FixedUpdate()
     {
+        BaseFixedUpdate();
+    }
+
+    internal void BaseFixedUpdate()
+    {
         AplicaDestroiGradual();
         AplicaInteligencia();
+    }
+
+    internal float GetDistanciaAlvo()
+    {
+        return Vector3.Distance(Alvos.FirstOrDefault().transform.position, this.transform.position);
     }
 
     private void AplicaInteligencia()
     {
         if (!EstaVivo) return;
+        if(!PerseguirAlvos)
         PersegueAlvoByPrioridade();
     }
 
@@ -75,9 +87,14 @@ public class InimigoBase_Script : MonoBehaviour
 
         if (EstaVivo) return;
         TimerPosMorte -= delta;
+
         var mainParticle = ParticleSystem.main;
         mainParticle.loop = true;
+
         ParticleSystem.Play();
+
+        if (TimerPosMorte < 2) Armature.gameObject.SetActive(false);
+
         if (TimerPosMorte > 0) return;
 
         var deltaEscala = delta / 4;
@@ -88,6 +105,9 @@ public class InimigoBase_Script : MonoBehaviour
         escalaAtual.z -= deltaEscala;
         var escalaModificada = escalaAtual;
         transform.localScale = escalaModificada;
+
+        if(transform.localScale.x < 0.3)
+            ParticleSystem.Stop();
 
         if (transform.localScale.x < 0.1) Destroy(this.gameObject);
     }
